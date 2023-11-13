@@ -15,13 +15,14 @@ class LoginPage extends StatelessWidget {
         children: [
           Text(
             "login page",
-            style: TextStyle(color: Colors.black ,fontSize: 100),
+            style: TextStyle(color: Colors.black, fontSize: 100),
           ),
-          ElevatedButton(onPressed: (){
-            Navigator.pushReplacementNamed(context,MyRoute.homeRoute);
-          }, child: Text("Go to Home Page")),
-         
-          
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, MyRoute.homeRoute);
+              },
+              child: Text("Go to Home Page")),
+
           // logo
 
           // username
