@@ -5,13 +5,37 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        children: [Text("this is your home page" , textScaleFactor: 4,),
-        TextButton(onPressed: (){},child: Text('Go to second Page'))
-        ]
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () {},
+                  
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[800]),
+                  child: const Text("Night Out"),    
+                      ),
+              ElevatedButton(
+                  onPressed: () {},
+                  
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: const Text("After Party"),    
+                      ),
+              ElevatedButton(
+                  onPressed: () {},
+                  
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red[800]),
+                  child: const Text("Special Events"),    
+                      )
+            ],
+          ),
+        ),
       ),
-
     );
   }
 }
