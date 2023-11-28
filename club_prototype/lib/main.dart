@@ -1,5 +1,6 @@
 import 'package:club_prototype/pages/homepage.dart';
 import 'package:club_prototype/pages/login.dart';
+import 'package:club_prototype/pages/night_out.dart';
 import 'package:club_prototype/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => LoginPage(),
         MyRoute.homeRoute: (context) => const HomePage(),
+        MyRoute.nightoutRoute :(context) => const NightOut(),
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:club_prototype/util/routes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,7 +13,9 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoute.nightoutRoute);
+                  },
                   
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue[800]),
