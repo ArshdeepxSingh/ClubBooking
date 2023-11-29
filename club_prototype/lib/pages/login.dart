@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-
 import 'package:club_prototype/util/routes.dart';
 import 'package:flutter/material.dart';
-
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -23,9 +21,9 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-          
+
                 // logo
-          
+
                 const Icon(
                   Icons.lock,
                   size: 100,
@@ -33,20 +31,20 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-          
+
                 // welcome
-          
+
                 const Text(
                   "Welcome",
                   style: TextStyle(fontSize: 32, color: Colors.blueGrey),
                 ),
-          
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
                       // username
-          
+
                       TextFormField(
                         controller: usernameController,
                         decoration: InputDecoration(
@@ -60,13 +58,13 @@ class LoginPage extends StatelessWidget {
                             hintText: "Enter Username ",
                             labelText: "Username"),
                       ),
-          
+
                       // password
-          
-                     const SizedBox(
+
+                      const SizedBox(
                         height: 15,
                       ),
-          
+
                       TextFormField(
                         obscureText: true,
                         controller: passwordController,
@@ -84,11 +82,11 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-          
+
                 //forgot password
-          
+
                 const Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -96,28 +94,27 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-          
+
                 const SizedBox(
                   height: 30,
                 ),
-          
+
                 // sign in
-          
-                 ElevatedButton(
+
+                ElevatedButton(
                   onPressed: () {},
-                 
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black, fixedSize: Size(200, 50)),
-                   child: Text(
+                  child: Text(
                     "Sign In",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-          
+
                 const SizedBox(
                   height: 10,
                 ),
-          
+
                 Row(
                   children: [
                     Expanded(
@@ -134,28 +131,59 @@ class LoginPage extends StatelessWidget {
                     )),
                   ],
                 ),
-          
+
                 // guest
-          
-                InkWell(
-                  onTap: (
-                    
-                  ){
-                    Navigator.pushNamed(context, MyRoute.homeRoute);
-                  },
-                  splashFactory: InkRipple.splashFactory,
-                  child :  Column
-                  (children:[
-                    Icon(Icons.account_circle , size:70,),
-                    Text('Guest', style:TextStyle(color:Colors.grey[600], fontWeight: FontWeight.bold))
-                  
-                  ] ),
-          
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 224, 223, 223)),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Image.asset(
+                            "assets/images/google_logo.png",
+                            height: 70,
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color:
+                                    const Color.fromARGB(255, 224, 223, 223)),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Image.asset(
+                            "assets/images/apple_logo.png",
+                            height: 70,
+                          )),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, MyRoute.homeRoute);
+                      },
+                      splashFactory: InkRipple.splashFactory,
+                      child: Column(children: [
+                        Icon(
+                          Icons.account_circle,
+                          size: 70,
+                        ),
+                        Text('Guest',
+                            style: TextStyle(
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.bold))
+                      ]),
+                    ),
+                  ],
                 )
-          
-          
-             
-          
+
                 // or continue with google or apple id
               ],
             ),
