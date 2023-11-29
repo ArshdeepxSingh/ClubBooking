@@ -1,7 +1,9 @@
 import 'package:club_prototype/pages/homepage.dart';
 import 'package:club_prototype/pages/login.dart';
+import 'package:club_prototype/pages/night_out.dart';
 import 'package:club_prototype/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,13 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode : ThemeMode.system,
+      theme: ThemeData(
+          textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
+      themeMode: ThemeMode.system,
       routes: {
-        "/":(context) => LoginPage(),
-        MyRoute.homeRoute :(context) => HomePage(),
+        "/": (context) => LoginPage(),
+        MyRoute.homeRoute: (context) => const HomePage(),
+        MyRoute.nightoutRoute :(context) => const NightOut(),
       },
-      
     );
- 
   }
 }
