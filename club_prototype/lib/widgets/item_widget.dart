@@ -8,11 +8,14 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.network(item.image),
-      title: Text(item.name),
-       trailing: TextButton( onPressed: (){}, child:  const Text("bookk")),
-
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        leading: Image.network(item.image),
+        title: Text(item.name),
+         trailing: TextButton( onPressed: (){}, child:  const Text("bookk")),
+    
+      ),
     );
   }
 }

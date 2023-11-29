@@ -1,15 +1,5 @@
 class ClubModel{
-  static final clubs = [
-    Item(
-      clubId: 1, 
-      name: "Club XYZ", 
-      location: "City A", 
-      description:"Club XYZ is a lively and energetic club located in the heart of City A. It offers a wide range of music genres and hosts themed parties every weekend.",
-      image: "https://images.pexels.com/photos/2747446/pexels-photo-2747446.jpeg?auto=compress&cs=tinysrgb&w=600", 
-      nightOut: true,
-      afterParty: false, 
-      specialParty: true)
-
+  static List<Item> clubs = [
   ]; 
 
 
@@ -42,4 +32,36 @@ class Item {
       required this.nightOut,
       required this.afterParty,
       required this.specialParty});
+
+
+  factory Item.fromMap(Map<String,dynamic> map){
+    return Item(
+      clubId : map['club_id'],
+      name : map['name'],
+      location : map['location'],
+      description : map['description'],
+      image : map['image'],
+      nightOut : map['night_out'] == 'true',
+      afterParty : map['after_party'] == 'true',
+      specialParty : map['special_party'] == 'true'
+
+    );
+
+  }
+
+  toMap()=>{
+    "club_id" : clubId,
+    "name": name,
+    "decription" : description,
+    "location" : location,
+    "image" : image,
+    "night_out" : nightOut ? true: false ,
+    "after_party" : afterParty? true :false,
+    "special_party" : specialParty? true : false
+
+    
+  };
+
+  
+
 }
