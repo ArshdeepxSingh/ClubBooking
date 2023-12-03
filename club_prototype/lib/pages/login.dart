@@ -1,4 +1,3 @@
-import 'package:club_prototype/util/routes.dart';
 import 'package:club_prototype/util/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -219,8 +218,8 @@ class _LoginPageState extends State<LoginPage> {
                           )),
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, MyRoute.homeRoute);
+                      onTap: () async{
+                        AuthService().signInAnonymously();
                       },
                       splashFactory: InkRipple.splashFactory,
                       child: Column(children: [

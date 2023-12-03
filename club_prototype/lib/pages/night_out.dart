@@ -37,7 +37,7 @@ class _NightOutState extends State<NightOut> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: (ClubModel.clubs != null && ClubModel.clubs.isNotEmpty)
+        child: (ClubModel.clubs.isNotEmpty)
             ? ListView.builder(
                 itemCount: ClubModel.clubs.length,
                 itemBuilder: (context, index) {
