@@ -1,4 +1,4 @@
-import 'package:club_prototype/pages/auth_page.dart';
+import 'package:club_prototype/pages/login/auth_page.dart';
 import 'package:club_prototype/pages/homepage.dart';
 import 'package:club_prototype/pages/night_out.dart';
 import 'package:club_prototype/util/routes.dart';

@@ -1,5 +1,5 @@
-import 'package:club_prototype/pages/login.dart';
-import 'package:club_prototype/pages/register_page.dart';
+import 'package:club_prototype/pages/login/login.dart';
+import 'package:club_prototype/pages/login/register_page.dart';
 import 'package:flutter/material.dart';
 
 
