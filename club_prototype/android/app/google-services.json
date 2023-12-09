@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "250195390762",
+    "project_id": "club-booking-cf8fb",
+    "storage_bucket": "club-booking-cf8fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250195390762:android:034449e4708f70499a6e53",
+        "android_client_info": {
+          "package_name": "com.example.club_prototype"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpsPTKBFPUbwynnIrUAb9DJrUKRwQnTlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

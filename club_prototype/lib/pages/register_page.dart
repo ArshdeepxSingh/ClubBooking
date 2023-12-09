@@ -1,21 +1,23 @@
 import 'package:club_prototype/util/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+import 'package:club_prototype/util/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key , required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  void signUserIn() async {
+  void signUserUp() async {
     // show loading circle
 
     showDialog(
@@ -26,21 +28,30 @@ class _LoginPageState extends State<LoginPage> {
           );
         });
 
-    // try sign in
+    // try sign up
 
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-
-      // pop the loading circle
-
+    if (passwordController.text != confirmPasswordController.text) {
+      // show error message , password don't match
       Navigator.pop(context);
-    } on FirebaseAuthException {
-      // pop the loading circle
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Passwords don't match")));
+    } else {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
 
-      Navigator.pop(context);
+        // pop the loading circle
 
-      wrongEmailOrPassword();
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        // pop the loading circle
+
+        Navigator.pop(context);
+
+        //show error message
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.code)));
+      }
     }
   }
 
@@ -80,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 // welcome
 
                 const Text(
-                  "Welcome",
+                  "Let's create an account",
                   style: TextStyle(fontSize: 32, color: Colors.blueGrey),
                 ),
 
@@ -95,10 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    color:  Color.fromARGB(255, 201, 201, 201)),
+                                    color: Color.fromARGB(255, 201, 201, 201)),
                                 borderRadius: BorderRadius.circular(50)),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.blue),
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
                                 borderRadius: BorderRadius.circular(50)),
                             hintText: "Enter Email ",
                             labelText: "Email"),
@@ -119,11 +131,31 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Color.fromARGB(255, 201, 201, 201)),
                                 borderRadius: BorderRadius.circular(50)),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.blue),
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
                                 borderRadius: BorderRadius.circular(50)),
                             hintText: "Enter Password ",
                             labelText: "Password"),
                       ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+
+                      TextFormField(
+                        obscureText: true,
+                        controller: confirmPasswordController,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 201, 201, 201)),
+                                borderRadius: BorderRadius.circular(50)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(50)),
+                            hintText: "Re-Enter Password ",
+                            labelText: "ConfirmPassword"),
+                      )
                     ],
                   ),
                 ),
@@ -148,12 +180,13 @@ class _LoginPageState extends State<LoginPage> {
 
                 ElevatedButton(
                   onPressed: () {
-                    signUserIn();
+                    signUserUp();
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black, fixedSize: const Size(200, 50)),
+                      backgroundColor: Colors.black,
+                      fixedSize: const Size(200, 50)),
                   child: const Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -162,14 +195,14 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10,
                 ),
 
-               const Row(
+                const Row(
                   children: [
                     Expanded(
                         child: Divider(
                       thickness: 2,
                     )),
                     Padding(
-                      padding:  EdgeInsets.all(20.0),
+                      padding: EdgeInsets.all(20.0),
                       child: Text("Or continue as"),
                     ),
                     Expanded(
@@ -188,8 +221,8 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: (){
-                          AuthService().signInWithGoogle();
-                        } ,
+                          AuthService().signInWithGoogle(); 
+                        },
                         child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -218,8 +251,8 @@ class _LoginPageState extends State<LoginPage> {
                           )),
                     ),
                     InkWell(
-                      onTap: () async{
-                        AuthService().signInAnonymously();
+                      onTap: () {
+                        Navigator.pushNamed(context, MyRoute.homeRoute);
                       },
                       splashFactory: InkRipple.splashFactory,
                       child: Column(children: [
@@ -243,14 +276,14 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Not a member? "),
+                    const Text("Already have an account "),
                     const SizedBox(
                       width: 4,
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Register Now",
+                        "Sign in",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
