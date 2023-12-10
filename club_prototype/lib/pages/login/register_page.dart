@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:club_prototype/util/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
 
   void signUserUp() async {
     // show loading circle
@@ -37,8 +40,21 @@ class _RegisterPageState extends State<RegisterPage> {
           .showSnackBar(const SnackBar(content: Text("Passwords don't match")));
     } else {
       try {
+
+        // sign up 
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
+
+        // add user details to database
+        addUserDetails(
+
+          nameController.text.trim(),
+          emailController.text.trim(),
+          phoneController.text.trim()
+          
+          );
+
+
 
         // pop the loading circle
 
@@ -53,6 +69,24 @@ class _RegisterPageState extends State<RegisterPage> {
             .showSnackBar(SnackBar(content: Text(e.code)));
       }
     }
+  }
+ 
+  
+
+  
+
+  Future addUserDetails( String name , String email ,String phone ){
+    return FirebaseFirestore.instance.collection('Users').add({
+
+
+      'id' :  FirebaseFirestore.instance.collection("Users").doc().id ,
+      'Name' : name  ,
+      'Email' : email ,
+      'Phone' : phone,
+        
+    }
+
+    );
   }
 
   void wrongEmailOrPassword() {
@@ -75,17 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 50,
-                ),
-
-                // logo
-
-                const Icon(
-                  Icons.lock,
-                  size: 100,
-                ),
-                const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 // welcome
@@ -94,11 +118,37 @@ class _RegisterPageState extends State<RegisterPage> {
                   "Let's create an account",
                   style: TextStyle(fontSize: 32, color: Colors.blueGrey),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
 
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
+
+                      // Name
+                      
+                      TextFormField(
+                        controller: nameController,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 201, 201, 201)),
+                                borderRadius: BorderRadius.circular(50)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(50)),
+                            hintText: "Enter your Name ",
+                            labelText: "Name"),
+                      ),
+
+                      
+
+                      const SizedBox(
+                        height: 15,
+                      ),
                       // email
 
                       TextFormField(
@@ -116,11 +166,32 @@ class _RegisterPageState extends State<RegisterPage> {
                             labelText: "Email"),
                       ),
 
-                      // password
+                      
 
                       const SizedBox(
                         height: 15,
                       ),
+                      
+                      TextFormField(
+                        controller: phoneController,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 201, 201, 201)),
+                                borderRadius: BorderRadius.circular(50)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(50)),
+                            hintText: "+91 ",
+                            labelText: "Phone Number"),
+                      ),
+                      
+                      const SizedBox(
+                        height: 15,
+                      ),
+
+                      // password
 
                       TextFormField(
                         obscureText: true,
@@ -137,9 +208,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             hintText: "Enter Password ",
                             labelText: "Password"),
                       ),
+
                       const SizedBox(
                         height: 15,
                       ),
+
+                      // confirm password
 
                       TextFormField(
                         obscureText: true,
@@ -155,7 +229,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(50)),
                             hintText: "Re-Enter Password ",
                             labelText: "ConfirmPassword"),
-                      )
+                      ),
+
+
+                      
+
+                      
+
+                      
                     ],
                   ),
                 ),

@@ -24,16 +24,11 @@ class AuthService {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  signInAnonymously() async{
+  signInAnonymously() async {
     try {
-    FirebaseAuth.instance.signInAnonymously();
-    }on FirebaseAuthException catch (e) {
-       
-       print(e.code);
-  
-}
-
-     
+      FirebaseAuth.instance.signInAnonymously();
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+    }
   }
-
 }

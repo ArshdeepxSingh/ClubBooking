@@ -1,5 +1,7 @@
-import 'package:club_prototype/pages/auth_page.dart';
+import 'package:club_prototype/pages/booking_page.dart';
+import 'package:club_prototype/pages/login/auth_page.dart';
 import 'package:club_prototype/pages/homepage.dart';
+import 'package:club_prototype/pages/login/profile.dart';
 import 'package:club_prototype/pages/night_out.dart';
 import 'package:club_prototype/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +29,27 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const AuthPage(),
         MyRoute.homeRoute: (context) => const HomePage(),
+        MyRoute.profileRoute: (context) => const ProfileScreen(),
         MyRoute.nightoutRoute: (context) => const NightOut(),
+        MyRoute.bookingRoute: (context) => const BookingPage(),
       },
     );
   }
 }
+
+// booking page 
+
+
+// members page 
+  // verification section 
+
+
+// profile page
+
+  // friends 
+
+  // 
+
+
+
+// 
