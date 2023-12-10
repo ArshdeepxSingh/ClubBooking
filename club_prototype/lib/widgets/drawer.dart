@@ -1,3 +1,4 @@
+import 'package:club_prototype/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
@@ -28,6 +29,17 @@ class MyDrawer extends StatelessWidget {
               decoration: const BoxDecoration(color: Colors.black),
               accountName: const Text("Dashboard" , textScaleFactor: 2,),
               accountEmail: Text('${FirebaseAuth.instance.currentUser?.email}'),),
+          ),
+
+          ListTile(
+            onTap: (){
+              Navigator.pushNamed(context, MyRoute.profileRoute);
+
+            },
+
+            leading: Icon(Icons.account_circle, color: Colors.white,),
+            title: const Text("Profile" , style: TextStyle(color: Colors.white),),
+
           ),
       
            ListTile(

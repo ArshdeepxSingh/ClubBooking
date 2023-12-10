@@ -1,4 +1,4 @@
-import 'package:club_prototype/models/club_tile.dart';
+import 'package:club_prototype/widgets/models/club_tile.dart';
 import 'package:flutter/material.dart';
 
 class ItemWidget extends StatelessWidget {
@@ -11,9 +11,12 @@ class ItemWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
+        
         leading: Image.network(item.image),
         title: Text(item.name),
+        subtitle: Text(item.description),
          trailing: TextButton( onPressed: (){}, child:  const Text("bookk")),
+         
     
       ),
     );
